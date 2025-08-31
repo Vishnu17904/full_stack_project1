@@ -24,7 +24,7 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  base:"vinayak11",
+   base: "/",
 }));
 
 
