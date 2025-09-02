@@ -30,10 +30,15 @@ const ProfilePage = () => {
           if (parsedUser.email) queryParams.append("email", parsedUser.email);
           if (parsedUser.phone) queryParams.append("phone", parsedUser.phone);
 
-           const response = await fetch(`http://localhost:5000/api/orders/user-orders?${queryParams.toString()}`);
-          if (!response.ok) {
-            throw new Error('Failed to fetch orders');
-          }
+const API_URL = import.meta.env.VITE_API_URL; // 👈 env variable
+
+const response = await fetch(
+  `${API_URL}/api/orders/user-orders?${queryParams.toString()}`
+);
+
+if (!response.ok) {
+  throw new Error("Failed to fetch orders");
+}
           const data = await response.json();
           setOrders(data);
         } catch (err) {

@@ -38,20 +38,21 @@ export const LoginForm = ({ onClose }: LoginFormProps) => {
       [e.target.name]: e.target.value,
     }));
   };
-
 const handleSubmit = async (e: React.FormEvent) => {
   e.preventDefault();
 
+  const API_URL = import.meta.env.VITE_API_URL; // 👈 take from .env
+
   const loginUrl =
-    userType === 'owner'
-      ? 'http://localhost:5000/api/owner/login'
-      : 'http://localhost:5000/api/user/login';
+    userType === "owner"
+      ? `${API_URL}/api/owner/login`
+      : `${API_URL}/api/user/login`;
 
   try {
     const res = await fetch(loginUrl, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         email: formData.email,
@@ -63,29 +64,29 @@ const handleSubmit = async (e: React.FormEvent) => {
     const data = await res.json();
 
     if (!res.ok) {
-      throw new Error(data.message || 'Login failed');
+      throw new Error(data.message || "Login failed");
     }
 
-    const userData = userType === 'owner' ? data.owner : data.user;
+    const userData = userType === "owner" ? data.owner : data.user;
 
     const fullUser = {
       ...userData,
-      phone: userData.phone || '',
-      address: userData.address || '',
+      phone: userData.phone || "",
+      address: userData.address || "",
       createdAt: userData.createdAt || new Date().toISOString(),
       role: userType,
     };
 
-    localStorage.setItem('user', JSON.stringify(fullUser));
-    alert('Login successful!');
+    localStorage.setItem("user", JSON.stringify(fullUser));
+    alert("Login successful!");
 
-    if (userType === 'owner') {
-      navigate('/owner-dashboard');
+    if (userType === "owner") {
+      navigate("/owner-dashboard");
     } else {
       onClose();
     }
   } catch (err: any) {
-    console.error('❌ Login error:', err.message);
+    console.error("❌ Login error:", err.message);
     alert(err.message);
   }
 };

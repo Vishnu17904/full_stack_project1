@@ -57,13 +57,16 @@ const orderData = {
   total: state.total,
 };
 
-  try {
-    console.log("OrderData being sent:", JSON.stringify(orderData, null, 2));
-    const response = await fetch("http://localhost:5000/api/orders", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(orderData),
-    });
+try {
+  console.log("OrderData being sent:", JSON.stringify(orderData, null, 2));
+
+  const API_URL = import.meta.env.VITE_API_URL; // 👈 take from .env
+
+  const response = await fetch(`${API_URL}/api/orders`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(orderData),
+  });
 
     if (response.ok) {
       toast({

@@ -8,7 +8,8 @@ export const useProducts = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await fetch('http://localhost:5000/api/products'); // ✅ Full URL
+        const API_URL = import.meta.env.VITE_API_URL; // 👈 use env variable
+        const res = await fetch(`${API_URL}/api/products`);
         if (!res.ok) {
           throw new Error('Network response was not ok');
         }

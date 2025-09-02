@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createHashRouter, RouterProvider } from "react-router-dom";  // 👈 use HashRouter
 import { CartProvider } from "@/contexts/CartContext";
 import Index from "./pages/Index";
 import { CartPage } from "./pages/CartPage";
@@ -13,8 +13,8 @@ import OwnerDashboard from "./pages/OwnerDashboard";
 
 const queryClient = new QueryClient();
 
-// ✅ Define routes
-const router = createBrowserRouter([
+// ✅ Define routes with HashRouter
+const router = createHashRouter([
   { path: "/", element: <Index /> },
   { path: "/cart", element: <CartPage /> },
   { path: "/profile", element: <ProfilePage /> },
@@ -33,7 +33,6 @@ const App = () => (
           router={router}
           future={{
             v7_startTransition: true,
-           // v7_relativeSplatPath: true,
           }}
         />
       </CartProvider>
@@ -42,10 +41,6 @@ const App = () => (
 );
 
 export default App;
-
-
-
-
 
 
 
