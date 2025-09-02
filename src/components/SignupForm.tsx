@@ -31,10 +31,11 @@ const handleSubmit = async (e: React.FormEvent) => {
     return;
   }
 
+  const API_URL = import.meta.env.VITE_API_URL; // 👈 use env variable
   const endpoint = userType === "owner" ? "owner" : "user";
 
   try {
-    const res = await fetch(`http://localhost:5000/api/${endpoint}/signup`, {
+    const res = await fetch(`${API_URL}/api/${endpoint}/signup`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -62,6 +63,7 @@ const handleSubmit = async (e: React.FormEvent) => {
     alert(err.message);
   }
 };
+
 
 
 

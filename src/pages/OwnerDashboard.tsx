@@ -79,18 +79,23 @@ export default function OwnerDashboard() {
     return () => clearInterval(interval);
   }, []);
 
-  const fetchOrders = async () => {
-    try {
-      setLoading(true);
-      const res = await fetch("http://localhost:5000/api/orders/recent");
-      const data = await res.json();
-      setOrders(data);
-    } catch (err) {
-      console.error("Failed to fetch recent orders:", err);
-    } finally {
-      setLoading(false);
+const fetchOrders = async () => {
+  try {
+    setLoading(true);
+    const API_URL = import.meta.env.VITE_API_URL; // 👈 use env variable
+    const res = await fetch(`${API_URL}/api/orders/recent`);
+    if (!res.ok) {
+      throw new Error("Failed to fetch recent orders");
     }
-  };
+    const data = await res.json();
+    setOrders(data);
+  } catch (err) {
+    console.error("Failed to fetch recent orders:", err);
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   const fetchProducts = async () => {
     setLoading(true);
