@@ -1,0 +1,9 @@
+version: 2
+updates:
+  - package-ecosystem: "npm" # npm project (package.json + package-lock.json / pnpm-lock.yaml)
+    directory: "/" # Location of package.json
+    schedule:
+      interval: "weekly" # Run weekly checks
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "deps"
