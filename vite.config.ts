@@ -4,28 +4,31 @@ import path from "path";
 import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
-export default defineConfig(({ mode }) => ({
-  server: {
-    host: "::",
-    port: 8080,
-    proxy: {
-      "/api": {
-        target: "http://localhost:5000", // 👈 Backend URL
-        changeOrigin: true,
+export default defineConfig(({ mode }) => {
+  return {
+    server: {
+      host: "::",
+      port: 8080,
+      proxy: {
+        "/api": {
+          target: "http://localhost:5000", // 👈 Backend URL
+          changeOrigin: true,
+        },
       },
     },
-  },
-  plugins: [
-    react(),
-    mode === "development" && componentTagger(),
-  ].filter(Boolean),
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "./src"),
+    plugins: [
+      react(),
+      mode === "development" && componentTagger(),
+    ].filter(Boolean),
+    resolve: {
+      alias: {
+        "@": path.resolve(__dirname, "./src"),
+      },
     },
-  },
-   base: "/full_stack_project1/",
-}));
+    base: mode === "gh" ? "/full_stack_project1/" : "/", // 👈 conditional base
+  };
+});
+
 
 
 // import { defineConfig } from "vite";

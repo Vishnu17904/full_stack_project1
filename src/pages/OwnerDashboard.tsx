@@ -112,41 +112,58 @@ const fetchOrders = async () => {
     }
   };
 
-  const handleAddProduct = async () => {
-    setMessage('');
-    setLoading(true);
-    
-    try {
-      const productData = {
-        ...newProduct,
-        price: Number(newProduct.price),
-        stock: Number(newProduct.stock),
-        image: productImage || '',
-      };
+ const handleAddProduct = async () => {
+  setMessage('');
+  setLoading(true);
 
-      const res = await fetch('/api/products', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(productData),
-      });
+  try {
+    const productData = {
+      ...newProduct,
+      price: Number(newProduct.price),
+      stock: Number(newProduct.stock),
+      image: productImage || '',
+    };
 
-      if (!res.ok) {
+    const res = await fetch('/api/products', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(productData),
+    });
+
+    // 👇 Handle non-OK responses safely
+    if (!res.ok) {
+      let errorMessage = 'Failed to add product';
+      try {
         const err = await res.json();
-        throw new Error(err.error || 'Failed to add product');
+        errorMessage = err.error || err.message || errorMessage;
+      } catch {
+        const text = await res.text();
+        if (text) errorMessage = text;
       }
-
-      const newProductData = await res.json();
-      setProducts((prev) => [...prev, newProductData]);
-      setMessage('✅ Product added successfully!');
-      setNewProduct({ name: "", price: "", description: "", category: "", stock: "", isFeatured: false });
-      setProductImage(null);
-      setShowAddProduct(false);
-    } catch (err: any) {
-      setMessage(`❌ ${err.message}`);
-    } finally {
-      setLoading(false);
+      throw new Error(errorMessage);
     }
-  };
+
+    const data = await res.json();
+    setProducts((prev) => [...prev, data.product || data]);
+    setMessage('✅ Product added successfully!');
+
+    setNewProduct({
+      name: '',
+      price: '',
+      description: '',
+      category: '',
+      stock: '',
+      isFeatured: false,
+    });
+    setProductImage(null);
+    setShowAddProduct(false);
+  } catch (err: any) {
+    setMessage(`❌ ${err.message}`);
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
