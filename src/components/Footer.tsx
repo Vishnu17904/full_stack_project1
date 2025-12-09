@@ -20,7 +20,11 @@ export const Footer = () => {
     { icon: Facebook, href: 'https://www.facebook.com/share/16vC23YqV4/', label: 'Facebook' },
     { icon: Instagram, href: 'https://www.instagram.com/vinayak_misthan_namkeen_2002?igsh=MXRsa2cxZGZvazhjNQ==', label: 'Instagram' },
     { icon: Twitter, href: '#', label: 'Twitter' },
-    { icon: MessageCircle, href: '#', label: 'WhatsApp' }
+    {
+  icon: MessageCircle,
+  href: "https://wa.me/919001007160?text=Hello%20I%20want%20to%20place%20an%20order",
+  label: "WhatsApp"
+}
   ];
 
   return (
