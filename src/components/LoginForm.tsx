@@ -178,7 +178,7 @@ const handleSubmit = async (e: React.FormEvent) => {
                     Cancel
                   </Button>
                   <Button type="submit" variant="default" className="flex-1">
-                    {userType === 'owner' ? 'Owner Sign In' : 'Sign In'}
+                    {userType === 'owner' ? 'Owner Log In' : 'Log In'}
                   </Button>
                 </div>
               </form>
