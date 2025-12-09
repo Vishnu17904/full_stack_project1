@@ -9,7 +9,7 @@ export const Footer = () => {
 
   const contactInfo = [
     { icon: MapPin, text: 'Vinayak misthan Bhandar Near Bus Stand Nimbi Jodha, Rajasthan' },
-    { icon: Phone, text: '+91 9001007160' },
+   { icon: Phone, text: "+91 9001007160", href: "tel:+919001007160"},
     { icon: Mail, text: 'info@vinayaksweets.com' },
     { icon: Clock, text: 'Open: 6:00 AM - 10:00 PM' }
   ];
