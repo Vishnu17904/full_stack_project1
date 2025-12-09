@@ -16,16 +16,30 @@ export const Footer = () => {
 
   const quickLinks = ['Home', 'Products', 'About Us', 'Contact', 'Order Online'];
   const categories = ['Traditional Sweets', 'Namkeens & Snacks', 'Festival Specials', 'Gift Boxes', 'Seasonal Items'];
-  const socialLinks = [
-    { icon: Facebook, href: 'https://www.facebook.com/share/16vC23YqV4/', label: 'Facebook' },
-    { icon: Instagram, href: 'https://www.instagram.com/vinayak_misthan_namkeen_2002?igsh=MXRsa2cxZGZvazhjNQ==', label: 'Instagram' },
-    { icon: Twitter, href: '#', label: 'Twitter' },
-    {
-  icon: MessageCircle,
-  href: "https://wa.me/919001007160?text=Hello%20I%20want%20to%20place%20an%20order",
-  label: "WhatsApp"
-}
-  ];
+const socialLinks = [
+  {
+    icon: Facebook,
+    href: "https://www.facebook.com/share/16vC23YqV4/",
+    label: "Facebook",
+  },
+  {
+    icon: Instagram,
+    href: "https://www.instagram.com/vinayak_misthan_namkeen_2002?igsh=MXRsa2cxZGZvazhjNQ==",
+    label: "Instagram",
+  },
+  {
+    icon: Twitter,
+    href: "https://twitter.com", 
+    label: "Twitter",
+  },
+  {
+    icon: MessageCircle,
+    href: "https://wa.me/919001007160?text=Hello%20I%20want%20to%20place%20an%20order",
+    label: "WhatsApp",
+    external: true, //  rendering logic
+  },
+];
+
 
   return (
     <footer id="contact" className="relative bg-gradient-to-b from-background to-primary/10 border-t border-primary/20">
