@@ -4,7 +4,7 @@ import User from "../models/user.js";
 
 const router = express.Router();
 
-// ✅ User Signup Route
+//  User Signup Route
 router.post("/signup", async (req, res) => {
   const { name, email, phone, password, userType = "user" } = req.body;
 
@@ -19,7 +19,7 @@ router.post("/signup", async (req, res) => {
       email,
       phone,
       password: hashedPassword,
-      userType // ✅ save userType
+      userType //  save userType
     });
 
     await newUser.save();
@@ -30,7 +30,7 @@ router.post("/signup", async (req, res) => {
   }
 });
 
-// ✅ Login Route
+//  Login Route
 router.post("/login", async (req, res) => {
   try {
     const { userType = "user", email, password } = req.body;
@@ -40,7 +40,7 @@ router.post("/login", async (req, res) => {
       return res.status(400).json({ message: "Invalid userType" });
     }
 
-    // ✅ Find user by email AND userType
+    //  Find user by email AND userType
     const user = await User.findOne({ email, userType });
     if (!user) {
       return res.status(404).json({ message: "User not found" });
@@ -51,7 +51,7 @@ router.post("/login", async (req, res) => {
       return res.status(400).json({ message: "Invalid password" });
     }
 
-    // ✅ Return user data
+    //  Return user data
     return res.status(200).json({
       message: "Login successful!",
       user: {
