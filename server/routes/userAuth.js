@@ -6,12 +6,12 @@ const router = express.Router();
 
 //  User Signup Route
 router.post("/signup", async (req, res) => {
-  const { name, email, phone, password, userType = "user" } = req.body;
+  const { name, email, phone, password, userType = "user" } = req.body; 
 
   try {
     const existingUser = await User.findOne({ email });
     if (existingUser)
-      return res.status(400).json({ message: "User already exists" });
+      return res.status(400).json({ message: "User already exists" }); //bad req
 
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = new User({
